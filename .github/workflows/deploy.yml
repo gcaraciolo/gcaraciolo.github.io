@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           # upload entire directory
-          path: 'build_production'
+          path: './build_production'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2

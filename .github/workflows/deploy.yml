@@ -16,22 +16,13 @@ jobs:
       run: npm install
     - name: Build Site
       run: npm run prod
-
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{steps.deployment.outputs.page_url}}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: './build_production'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+    - name: Upload Artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: './build_production'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
     # runs-on: ubuntu-latest
     # steps:
     # - name: Stage Files

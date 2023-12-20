@@ -1,0 +1,7 @@
+/build_*/
+/node_modules/
+/source/assets/build/
+/vendor/
+.DS_Store
+torchlight_cache/
+.env

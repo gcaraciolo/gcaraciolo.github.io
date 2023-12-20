@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="Reasoning about Laravel, PHP, Vue.js, JavaScript and sharing all along. Guilherme Caraciolo.">
+
+        <meta property="og:title" content="Reflexão sobre responder a mudanças | Guilherme Caraciolo on Laravel"/>
+        <meta property="og:url" content="https://gcaraciolo.github.io/blog/pt/respond-to-changes"/>
+        <meta property="og:description" content="Reasoning about Laravel, PHP, Vue.js, JavaScript and sharing all along. Guilherme Caraciolo." />
+
+        <title>Reflexão sobre responder a mudanças | Guilherme Caraciolo on Laravel</title>
+
+        <link rel="home" href="https://gcaraciolo.github.io">
+        <link rel="icon" href="/favicon.ico">
+        <link href="/blog/feed.atom" type="application/atom+xml" rel="alternate" title="Guilherme Caraciolo on Laravel Atom Feed">
+
+                    <!-- Insert analytics code here -->
+        
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+        <link rel="stylesheet" href="/assets/build/css/main.css?id=573e9e9c3898b16556b274a4d9f13e7f">
+    </head>
+
+    <body class="flex flex-col justify-between min-h-screen bg-white text-gray-800 leading-normal">
+        <main role="main" class="flex-auto w-full container max-w-4xl mx-auto py-16 px-6">
+                <div class="max-w-2xl mx-auto">
+        <a href="/" class="cursor-pointer">
+    <div class="text-center flex flex-col items-center">
+        <div class=""><img class="rounded-full h-24 w-24" src="/assets/img/avatar.png" alt="avatar"></div>
+        <p class="text-2xl text-gray-700">Guilherme Caraciolo</p>
+    </div>
+</a>
+        <div class="text-center mt-12">
+            <p class="text-gray-400 text-sm my-2">April 11, 2023</p>
+            <h1 class="leading-none mb-8 text-4xl font-semibold">Reflexão sobre responder a mudanças</h1>
+        </div>
+
+        <div class="mb-10 py-4 text-justify" v-pre>
+            <article
+    class="prose dark:prose-invert prose-a:no-underline prose-a:font-bold prose-a:border-b-[#7dd3fc] prose-a:border-b max-w-none">
+    <p>Ontem na pós, a turma foi dividida em quatro grupos e cada grupo recebeu um dos princípios ágeis para debater. O meu grupo ficou com o princípio "Responder a mudanças no lugar de seguir um plano".</p>
+
+<p>O curso tem pessoas de diversas áreas e nem todas são relacionadas a tecnologia, portanto as pessoas têm experiências e vivências diferentes.</p>
+
+<p>Eu comecei a provocação para gente ir soltando ideias e colocando no chat do zoom o que achávamos que entendemos por esse princípio. E aí tivemos as seguintes sentenças:
+- Adaptar o orçamento do projeto diante da diminuição de recursos disponíveis.
+- Mudas as prioridades a partir de nova demanda trazida pelo cliente.
+- Adaptabilidade do trabalho de hoje a realidade do cliente no momento que ele está. 
+- Prioridades que mudam de acordo com a maturidade do projeto.
+- Testar partes e adaptar de acordo com o feedback
+- Refazer o projeto original em decorrência de medida normativa de legislação que altera o cenário inicialmente imaginado.
+- Redirecionar a meta de inovação no momento em que a concorrência lança um produto com características semelhantes ao projeto em desenvolvimento.
+- Incentivar e formar equipes resilientes e adaptáveis, atentas a mudanças internas e externas.
+- Responder ao cenário de mudanças com uma rápida tomada de decisão, principalmente às externalidades.
+- Refazer a linha de campanha publicitária em função da mudança de preço do produto que inviabilizaria a proposta da campanha.</p>
+
+<p>Além disso, também falamos sobre o papel da liderança nesse contexto e de equipes autogerenciáveis. Discutimos brevemente sobre como equipes autogerenciáveis conseguem responder a mudanças sem precisar de um ator central, fazendo o papel de líder. E a importância de um líder quando a equipe não é madura o suficiente para ser auto gerenciável; como o líder consegue dar a visão ao time sobre a importância de responder às demandas e alterar um plano de última hora.</p>
+
+<p>A discussão foi muito legal, mas o tempo foi curto para nos aprofundarmos em como ter um ambiente que seja flexível o suficiente para atender a esse princípio. E ainda acho que falhei em não ter passado para os meus colegas um pouco de conhecimento a respeito disso.</p>
+
+<p>Tudo que falamos e escrevemos está muito relacionado a como as pessoas interpretam a palavra <strong>ágil</strong>. No exemplo da campanha publicitária, por exemplo, falamos que o princípio se aplicaria com: ou uma equipe autogerenciável que entenderia a importância de atender a solicitação do cliente e trabalhar acima do esperado para entregar o que foi solicitado de última hora, ou com um líder fazendo esse papel de dar a visão para a equipe da importância do que precisa ser feito.</p>
+
+<p>Ambas as opiniões nada tem a ver com o manifesto ágil. Nada adianta ter coragem para trabalhar duro com solicitações de última hora. Não é isso que se espera da agilidade. Tão pouco a velocidade que um determinado indivíduo consegue entregar as alterações a tempo.</p>
+
+<h3>Como responder a mudanças de forma ágil</h3>
+
+<p>A agilidade vem das práticas e disciplinas que o time ágil tem na cultura. Quando estamos falando de times que trabalham com desenvolvimento de software, o princípio se traduz basicamente na velocidade que esse time consegue responder a alterações nos requisitos do projeto. Quem já trabalhou com software sabe que não é simplesmente: "ah, blz.. a gente vai refazer os requisitos..". O custo é alto e o risco maior ainda. O mais provável que aconteça é a geração de defeitos no software e a incompletude do que foi pedido, aumentando ainda mais a insatisfação do cliente.</p>
+
+<p>Algumas das disciplinas que um time de desenvolvimento de software ágil tem são:
+- Integração e implantação contínua do que está sendo construído com o código principal;
+- Escrita e execução contínua de testes automatizados;
+- Refatoração do código para que este sempre represente os conceitos e abstrações mais fiéis ao domínio;
+- Estudo contínuo de negócio do cliente para ter capacidade de negociar escopo;
+- Métricas claras para identificar problemas rapidamente.</p>
+
+<h3>Integração e implantação contínua</h3>
+
+<p>Uma dificuldade de realizar mudanças de forma ágil é quando o projeto está estruturado de uma forma que seus componentes só são integrados algumas vezes durante o ciclo de desenvolvimento do projeto. Geralmente em lugares assim, essas integrações são penosas. Quando a implantação é feita, bugs em diferentes lugares da aplicação aparecem.</p>
+
+<p>Em um time ágil, a integração e implantação do código é feita de forma contínua, de preferência várias vezes ao dia. Obviamente não é só por isso que problemas são evitados. Porém nesse ambiente o time cria mecanismos para que as integrações e implantações ocorram da forma mais suave possível.</p>
+
+<p>O time terá a disciplina de todo trabalho feito passar sempre pela revisão de um colega; deverá também ter ferramentas que devem reverter a alteração no ambiente de produção caso algum distúrbio seja notificado nas métricas do projeto; irá conectar o projeto com ferramentas que irão identificar problemas e defeitos em tempo real (métricas claras). O time também irá entender a importância de ter testes automatizados e da refatoração.</p>
+
+<h3>Testes automatizados e refatoração</h3>
+
+<p>Na minha opinião essas são as principais práticas do time ágil. No ambiente em que os testes de software são feitos manualmente, qualquer mudança gera uma cascata de problemas que demoram bastante para serem corrigidos. E quando um código não representa de forma clara o domínio que está inserido, existe uma dificuldade imensa na leitura do código e interpretações erradas passam a acontecer com frequência.</p>
+
+<p>Os testes automatizados são executados na ordem de segundos e garantem que comportamentos conhecidos aconteçam de forma previsível. Para exemplificar isso imaginem um software que faz o cálculo de seguro. Quando uma regra do seguro muda, o software precisa ser alterado. Os testes automatizados irão rodar os diversos caminhos que podem ser feitos pelo software para chegar num resultado. Aplicar a mudança se torna mais seguro. "Basta" alterar a bateria de testes e fazer o software responder a esse novo cenário. Não é fácil, mas é extremamente mais ágil e seguro do que ter que rodar todos os possíveis cenários de cálculo manualmente.</p>
+
+<p>E se torna ainda mais fácil se o projeto está bem feito no que diz respeito a refatoração do código. Se os requisitos mudam, os conceitos mudam. Portanto o software deve estar escrito de acordo com esses conceitos. Boas abstrações são identificadas ao longo do projeto e se deixadas de lado, cada nova alteração se torna mais complexa de fazer, ao ponto de simplesmente ser penosa.</p>
+
+<h3>Conhecimento do negócio e métricas claras</h3>
+
+<p>Um time ágil identifica problemas em tempo real. Se o software está com defeito, terá uma notificação em algum lugar mostrando isso. Mas não só os defeitos são monitorados. Se algo vai bem, o time ágil também tem gráficos temporais mostrando o que vai bem.</p>
+
+<p>Isso permite que o time converse com os clientes e experts no domínio mostrando como o software está sendo utilizado pelos usuários. Empresas pivotam a solução baseada nesse conhecimento. A inovação de um negócio acontece na melhoria contínua de tais métricas.</p>
+
+<h3>E fora da área de software?</h3>
+
+<p>Dado esses exemplos de práticas e disciplinas de um time ágil de desenvolvimento de software, como podemos transferir esse conhecimento para as outras áreas? Pegando as sentenças colocadas pelo meu grupo, na minha ignorância em tais áreas, consigo imaginar em algumas coisas.</p>
+
+<p>No cenário de uma agência de marketing digital, onde o cliente pede para que uma alteração de preço seja feita de última hora o time deve estar inserido no seguinte contexto para ser ágil:</p>
+
+<p>Ter uma ferramenta que, dado um comando, todos os artefatos sejam atualizados. Também ter um fluxo claro de aprovação dos artefatos; uma ferramenta que seja capaz de publicar esses artefatos nos diferentes canais de comunicação e se necessário, editar o conteúdo. 
+O time deve ter métricas claras de como as pessoas estão reagindo a campanha e se adaptar. Se não está havendo nenhum engajamento, o time deve entender isso logo no início da campanha. Se estiver tendo uma recepção negativa, o time tem o plano B pronto para contornar a situação rapidamente.
+O time experimenta diferentes formas de divulgação e ajuda o cliente a tomar a melhor decisão de como fazer uma campanha...</p>
+</article>
+        </div>
+        <div class="border-b border-b-gray-200 mb-8"></div>
+
+        <p class="text-lg text-center text-gray-700">Guilherme Caraciolo</p>
+        <div class="text-center flex flex-col items-center">
+    <p class="text-gray-700">Software Engineer</p>
+    <p class="text-gray-700 py-4">
+        Reasoning about Laravel, VueJS and programming in general.
+    </p>
+    <div class="flex gap-6">
+        <a target="_blank" class="group -m-1 p-1" aria-label="Follow on Twitter" href="https://twitter.com/gcaraciolo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"
+                class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300">
+                <path
+                    d="M20.055 7.983c.011.174.011.347.011.523 0 5.338-3.92 11.494-11.09 11.494v-.003A10.755 10.755 0 0 1 3 18.186c.308.038.618.057.928.058a7.655 7.655 0 0 0 4.841-1.733c-1.668-.032-3.13-1.16-3.642-2.805a3.753 3.753 0 0 0 1.76-.07C5.07 13.256 3.76 11.6 3.76 9.676v-.05a3.77 3.77 0 0 0 1.77.505C3.816 8.945 3.288 6.583 4.322 4.737c1.98 2.524 4.9 4.058 8.034 4.22a4.137 4.137 0 0 1 1.128-3.86A3.807 3.807 0 0 1 19 5.274a7.657 7.657 0 0 0 2.475-.98c-.29.934-.9 1.729-1.713 2.233A7.54 7.54 0 0 0 22 5.89a8.084 8.084 0 0 1-1.945 2.093Z">
+                </path>
+            </svg>
+        </a>
+        <a target="_blank" class="group -m-1 p-1" aria-label="Follow on Instagram" href="https://instagram.com/gcaraciolo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"
+                class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300">
+                <path
+                    d="M12 3c-2.444 0-2.75.01-3.71.054-.959.044-1.613.196-2.185.418A4.412 4.412 0 0 0 4.51 4.511c-.5.5-.809 1.002-1.039 1.594-.222.572-.374 1.226-.418 2.184C3.01 9.25 3 9.556 3 12s.01 2.75.054 3.71c.044.959.196 1.613.418 2.185.23.592.538 1.094 1.039 1.595.5.5 1.002.808 1.594 1.038.572.222 1.226.374 2.184.418C9.25 20.99 9.556 21 12 21s2.75-.01 3.71-.054c.959-.044 1.613-.196 2.185-.419a4.412 4.412 0 0 0 1.595-1.038c.5-.5.808-1.002 1.038-1.594.222-.572.374-1.226.418-2.184.044-.96.054-1.267.054-3.711s-.01-2.75-.054-3.71c-.044-.959-.196-1.613-.419-2.185A4.412 4.412 0 0 0 19.49 4.51c-.5-.5-1.002-.809-1.594-1.039-.572-.222-1.226-.374-2.184-.418C14.75 3.01 14.444 3 12 3Zm0 1.622c2.403 0 2.688.009 3.637.052.877.04 1.354.187 1.67.31.421.163.72.358 1.036.673.315.315.51.615.673 1.035.123.317.27.794.31 1.671.043.95.052 1.234.052 3.637s-.009 2.688-.052 3.637c-.04.877-.187 1.354-.31 1.67-.163.421-.358.72-.673 1.036a2.79 2.79 0 0 1-1.035.673c-.317.123-.794.27-1.671.31-.95.043-1.234.052-3.637.052s-2.688-.009-3.637-.052c-.877-.04-1.354-.187-1.67-.31a2.789 2.789 0 0 1-1.036-.673 2.79 2.79 0 0 1-.673-1.035c-.123-.317-.27-.794-.31-1.671-.043-.95-.052-1.234-.052-3.637s.009-2.688.052-3.637c.04-.877.187-1.354.31-1.67.163-.421.358-.72.673-1.036.315-.315.615-.51 1.035-.673.317-.123.794-.27 1.671-.31.95-.043 1.234-.052 3.637-.052Z">
+                </path>
+                <path
+                    d="M12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm0-7.622a4.622 4.622 0 1 0 0 9.244 4.622 4.622 0 0 0 0-9.244Zm5.884-.182a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0Z">
+                </path>
+            </svg>
+        </a>
+        <a target="_blank" class="group -m-1 p-1" aria-label="Follow on GitHub" href="https://github.com/gcaraciolo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"
+                class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12 2C6.475 2 2 6.588 2 12.253c0 4.537 2.862 8.369 6.838 9.727.5.09.687-.218.687-.487 0-.243-.013-1.05-.013-1.91C7 20.059 6.35 18.957 6.15 18.38c-.113-.295-.6-1.205-1.025-1.448-.35-.192-.85-.667-.013-.68.788-.012 1.35.744 1.538 1.051.9 1.551 2.338 1.116 2.912.846.088-.666.35-1.115.638-1.371-2.225-.256-4.55-1.14-4.55-5.062 0-1.115.387-2.038 1.025-2.756-.1-.256-.45-1.307.1-2.717 0 0 .837-.269 2.75 1.051.8-.23 1.65-.346 2.5-.346.85 0 1.7.115 2.5.346 1.912-1.333 2.75-1.05 2.75-1.05.55 1.409.2 2.46.1 2.716.637.718 1.025 1.628 1.025 2.756 0 3.934-2.337 4.806-4.562 5.062.362.32.675.936.675 1.897 0 1.371-.013 2.473-.013 2.82 0 .268.188.589.688.486a10.039 10.039 0 0 0 4.932-3.74A10.447 10.447 0 0 0 22 12.253C22 6.588 17.525 2 12 2Z">
+                </path>
+            </svg>
+        </a>
+        <a target="_blank" class="group -m-1 p-1" aria-label="Follow on LinkedIn" href="https://www.linkedin.com/in/guilherme-caraciolo-52485999/">
+            <svg viewBox="0 0 24 24" aria-hidden="true"
+                class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300">
+                <path
+                    d="M18.335 18.339H15.67v-4.177c0-.996-.02-2.278-1.39-2.278-1.389 0-1.601 1.084-1.601 2.205v4.25h-2.666V9.75h2.56v1.17h.035c.358-.674 1.228-1.387 2.528-1.387 2.7 0 3.2 1.778 3.2 4.091v4.715zM7.003 8.575a1.546 1.546 0 01-1.548-1.549 1.548 1.548 0 111.547 1.549zm1.336 9.764H5.666V9.75H8.34v8.589zM19.67 3H4.329C3.593 3 3 3.58 3 4.297v15.406C3 20.42 3.594 21 4.328 21h15.338C20.4 21 21 20.42 21 19.703V4.297C21 3.58 20.4 3 19.666 3h.003z">
+                </path>
+            </svg>
+        </a>
+    </div>
+</div>
+    </div>
+        </main>
+
+        <script src="/assets/build/js/main.js?id=b7a53903c7901b49880ccb30ec0c429f"></script>
+
+            </body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="O custo da má nomenclatura em projetos de software">
+
+        <meta property="og:title" content="O custo da má nomenclatura | Guilherme Caraciolo on Laravel"/>
+        <meta property="og:url" content="https://gcaraciolo.github.io/blog/pt/the-cost-of-bad-naming"/>
+        <meta property="og:description" content="O custo da má nomenclatura em projetos de software" />
+
+        <title>O custo da má nomenclatura | Guilherme Caraciolo on Laravel</title>
+
+        <link rel="home" href="https://gcaraciolo.github.io">
+        <link rel="icon" href="/favicon.ico">
+        <link href="/blog/feed.atom" type="application/atom+xml" rel="alternate" title="Guilherme Caraciolo on Laravel Atom Feed">
+
+                    <!-- Insert analytics code here -->
+        
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+        <link rel="stylesheet" href="/assets/build/css/main.css?id=573e9e9c3898b16556b274a4d9f13e7f">
+    </head>
+
+    <body class="flex flex-col justify-between min-h-screen bg-white text-gray-800 leading-normal">
+        <main role="main" class="flex-auto w-full container max-w-4xl mx-auto py-16 px-6">
+                <div class="max-w-2xl mx-auto">
+        <a href="/" class="cursor-pointer">
+    <div class="text-center flex flex-col items-center">
+        <div class=""><img class="rounded-full h-24 w-24" src="/assets/img/avatar.png" alt="avatar"></div>
+        <p class="text-2xl text-gray-700">Guilherme Caraciolo</p>
+    </div>
+</a>
+        <div class="text-center mt-12">
+            <p class="text-gray-400 text-sm my-2">October 30, 2021</p>
+            <h1 class="leading-none mb-8 text-4xl font-semibold">O custo da má nomenclatura</h1>
+        </div>
+
+        <div class="mb-10 py-4 text-justify" v-pre>
+            <article
+    class="prose dark:prose-invert prose-a:no-underline prose-a:font-bold prose-a:border-b-[#7dd3fc] prose-a:border-b max-w-none">
+    <p>Você já precisou alterar um software em que existem métodos com assinaturas do tipo <code>setSomething, add, remove</code>, etc;
+e dentro desses métodos existem dezenas de linha de código com regras de negócio complexas?</p>
+
+<p>Nessas situações, a sensação que tenho ao ler o código é de como se eu fosse um intérprete por ter que ler todas as
+regras de negócio, separando mentalmente o que cada bloco de código faz, correlacionando com os requisitos do software,
+para só então realmente entender o significado e fazer as alterações necessárias.</p>
+
+<p>Nomear os diversos elementos em um projeto de software é difícil. Tão difícil que Phil Karlton afirmava que "existem apenas
+duas coisas difíceis em ciências da computação: invalidação de cache e nomear coisas".</p>
+
+<p>Mas por que é tão difícil dar nome aos elementos que compõem um software? Para tentar achar uma resposta para essa
+pergunta, vamos analisar duas versões de um pedaço de código. Trata-se de um código para estender o período ativo
+de uma assinatura. Iremos lidar com as entidades <code>pagamento, plano, pacote, conta e assinatura</code>.</p>
+
+<p>Código ruim:</p>
+
+<pre><code class="language-php">__torchlight-block-[cd2cd2c7-cbda-4058-b84b-add9a6392af1]__</code></pre>
+
+<p>Para entender as regras de negócio nessa versão foi necessário entender os detalhes de implementação.
+O código é difícil de ler, difícil de testar, está cheio de acoplamento e carece de abstração.</p>
+
+<h2>Falta de abstração e Encapsulamento</h2>
+
+<p>Para entender o método foi necessário entender como os objetos são encontrados no banco de dados, como é calculado a diferença
+entre pacotes com preços diferentes e como é realizado o cálculo de dias a serem adicionados numa assinatura.</p>
+
+<p>O método também viola o princípio de Ocultamento de Informação, onde os dados da classe <code>Subscription</code> são alterados por uma outra
+classe. Esse tipo de código torna o sistema inflexível e imprevisível, já que diversas classes Clientes podem alterar os
+dados da classe Subscription.</p>
+
+<p>Ter que passar por esse processo todas as vezes que vamos alterar um software é custoso e com o tempo cansa. Logo os
+desenvolvedores estarão lendo meias palavras, assumindo um comportamento inexistente, e introduzindo bugs, por não
+terem entendido como aquela parte do software funciona e também como outras partes são afetadas pelo código, gerando
+efeitos colaterais inesperados.</p>
+
+<h2>Efeito colateral</h2>
+
+<p>O método <code>add</code> é responsável por recuperar os dados do mecanismo de persistência, realizar diversos cálculos e verificações
+sobre os dias que devem ser adicionados numa assinatura e em seguida salvar os dados (ps: estamos utilizado o ActiveRecord
+nesse exemplo, que NÃO é um problema).</p>
+
+<p>À medida que novos requisitos chegam, as alterações que são feitas podem gerar efeitos colaterais inesperados.
+Precisamos de uma forma de testar os cenários de cálculo extensão do período ativo de uma assinatura sem nos preocupar
+em como os dados são recuperados ou persistidos.</p>
+
+<p>Vamos começar a resolver esses problemas utilizando os nomes que geralmente utilizamos na nossa cabeça mas que não estão
+refletidos no código.</p>
+
+<h2>Nomeando coisas</h2>
+
+<p>Algo que incomoda é ver a atribuição <code>$subscription-&gt;ends_at</code> sendo feita fora do modelo <code>Subscription</code>. Iniciaremos
+adicionando encapsulamento nessa alteração através do método <code>extendActivePeriod</code>. Se você pensou no método <code>setEndsAt</code>,
+repense, pois é exatamente esse tipo de nomenclatura que queremos evitar!</p>
+
+<pre><code class="language-php">__torchlight-block-[3469ca28-a21e-48b7-8556-ccee5d5edad2]__</code></pre>
+
+<p>Agora podemos extrair a responsabilidade de calcular quantos dias devem ser adicionados à assinatura em um outro método.
+Na verdade, queremos realmente calcular quando será a próxima data de cobrança dado uma possível alteração no plano
+contratado. O nome <code>calculateNextBillingDate</code> me parece um bom candidato. Vamos usá-lo, e já aproveitaremos para fazer
+mais algumas melhorias, tentando deixar o código mais explícito.</p>
+
+<p>Uma melhor versão:</p>
+
+<pre><code class="language-php">__torchlight-block-[db25529e-8470-4d15-b50b-cef409178b14]__</code></pre>
+
+<p>Um.. Parece que a quantidade de linhas no código aumentou bastante. Mas.. quem falou que poucas linhas de código
+significam maior legibilidade? (Na verdade já vi discussões que arrow functions <code>() =&gt; {}</code> são mais legíveis que utilizar
+<code>function () {}</code> ...)</p>
+
+<p>Com essa versão melhorada, você consegue pensar no cálculo de dias proporcionais que devem ser adicionados numa assinatura
+que teve o plano alterado, abstraindo as outras responsabilidades do código? Se sim, esse é o objetivo.
+Um bom código tem interfaces reveladoras de intenção que abstraem os detalhes de implementação.</p>
+
+<p>Além disso, agora você pode, e na verdade deve, se livrar o PaymentService, pois esse já não tem mais razão para existir.
+A criação desse tipo de classe só faz com que o software contenha modelos anêmicos.</p>
+
+<p>Agora, caso você esteja se perguntando como chegamos nesses nomes, e esteja pensando onde está a resposta para dar
+melhores nomes aos elementos que compõe um software, aqui vão algumas dicas:</p>
+
+<ol>
+<li><p>Escute bem os termos utilizados pelos experts no domínio do software.
+Converse constantemente com as pessoas que entendem do domínio em que o software está inserido. Mas, não se limite
+apenas a isso. Busque mais informações na Internet, livros, etc. Ao conversar com outros desenvolvedores sobre
+o software utilize os mesmos termos e aplique essa mesma linguagem no código. Evite criar maps de tradução
+e estabeleça uma linguagem ubíqua. Você irá aprender muito mais sobre isso no livro Domain Driven Design de Eric Evans.</p></li>
+<li><p>Tenha domínio sobre princípios de design de software.
+Comece dominando bem as boas práticas de programação orientada a objetos e os princípios SOLID. Permita que seu
+código esteja pronto para ser estendido sem alterar muito do código que já existe.</p></li>
+<li><p>Crie abstrações.
+Não deixe que os detalhes de implementação afetem as regras de negócio.</p></li>
+</ol>
+
+<h2>Conclusão</h2>
+
+<p>Um código ruim se revela quando não são utilizados bons nomes em métodos, variáveis, classes, etc. Lidar com esse tipo
+de código diariamente reduz a produtividade do time e diminui a qualidade do software.</p>
+
+<p>A falta de abstração obriga os programadores a lerem os detalhes de implementação de todos os casos de uso, inclusive
+dos que não estão relacionados diretamente com o escopo da atividade atual, por causa dos efeitos colaterais. Esse tempo gasto reflete diretamente nos custos de manutenção do software.</p>
+
+<p>A introdução de abstrações no código pode ser feita ao criar limites bem definidos de responsabilidade para cada trecho
+de código e nomear estes com os termos utilizados pelos experts no domínio que o software opera.</p>
+
+<h2>Sugestão: Exercício de fixação</h2>
+
+<ol>
+<li>Analise o código abaixo. Esse código é responsável pelo compartilhamento de uma publicação
+em um Blog. Um novo requisito chegou, solicitando que publicações com mais de um mês após o primeiro rascunho,
+não devem ser compartilhadas. Descreva quais os problemas que esse código tem e faça as alterações necessárias para corrigi-lo.</li>
+</ol>
+
+<pre><code class="language-php">__torchlight-block-[74b8502c-6f59-4b17-81db-fc7ff497f9a8]__</code></pre>
+</article>
+        </div>
+        <div class="border-b border-b-gray-200 mb-8"></div>
+
+        <p class="text-lg text-center text-gray-700">Guilherme Caraciolo</p>
+        <div class="text-center flex flex-col items-center">
+    <p class="text-gray-700">Software Engineer</p>
+    <p class="text-gray-700 py-4">
+        Reasoning about Laravel, VueJS and programming in general.
+    </p>
+    <div class="flex gap-6">
+        <a target="_blank" class="group -m-1 p-1" aria-label="Follow on Twitter" href="https://twitter.com/gcaraciolo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"
+                class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300">
+                <path
+                    d="M20.055 7.983c.011.174.011.347.011.523 0 5.338-3.92 11.494-11.09 11.494v-.003A10.755 10.755 0 0 1 3 18.186c.308.038.618.057.928.058a7.655 7.655 0 0 0 4.841-1.733c-1.668-.032-3.13-1.16-3.642-2.805a3.753 3.753 0 0 0 1.76-.07C5.07 13.256 3.76 11.6 3.76 9.676v-.05a3.77 3.77 0 0 0 1.77.505C3.816 8.945 3.288 6.583 4.322 4.737c1.98 2.524 4.9 4.058 8.034 4.22a4.137 4.137 0 0 1 1.128-3.86A3.807 3.807 0 0 1 19 5.274a7.657 7.657 0 0 0 2.475-.98c-.29.934-.9 1.729-1.713 2.233A7.54 7.54 0 0 0 22 5.89a8.084 8.084 0 0 1-1.945 2.093Z">
+                </path>
+            </svg>
+        </a>
+        <a target="_blank" class="group -m-1 p-1" aria-label="Follow on Instagram" href="https://instagram.com/gcaraciolo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"
+                class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300">
+                <path
+                    d="M12 3c-2.444 0-2.75.01-3.71.054-.959.044-1.613.196-2.185.418A4.412 4.412 0 0 0 4.51 4.511c-.5.5-.809 1.002-1.039 1.594-.222.572-.374 1.226-.418 2.184C3.01 9.25 3 9.556 3 12s.01 2.75.054 3.71c.044.959.196 1.613.418 2.185.23.592.538 1.094 1.039 1.595.5.5 1.002.808 1.594 1.038.572.222 1.226.374 2.184.418C9.25 20.99 9.556 21 12 21s2.75-.01 3.71-.054c.959-.044 1.613-.196 2.185-.419a4.412 4.412 0 0 0 1.595-1.038c.5-.5.808-1.002 1.038-1.594.222-.572.374-1.226.418-2.184.044-.96.054-1.267.054-3.711s-.01-2.75-.054-3.71c-.044-.959-.196-1.613-.419-2.185A4.412 4.412 0 0 0 19.49 4.51c-.5-.5-1.002-.809-1.594-1.039-.572-.222-1.226-.374-2.184-.418C14.75 3.01 14.444 3 12 3Zm0 1.622c2.403 0 2.688.009 3.637.052.877.04 1.354.187 1.67.31.421.163.72.358 1.036.673.315.315.51.615.673 1.035.123.317.27.794.31 1.671.043.95.052 1.234.052 3.637s-.009 2.688-.052 3.637c-.04.877-.187 1.354-.31 1.67-.163.421-.358.72-.673 1.036a2.79 2.79 0 0 1-1.035.673c-.317.123-.794.27-1.671.31-.95.043-1.234.052-3.637.052s-2.688-.009-3.637-.052c-.877-.04-1.354-.187-1.67-.31a2.789 2.789 0 0 1-1.036-.673 2.79 2.79 0 0 1-.673-1.035c-.123-.317-.27-.794-.31-1.671-.043-.95-.052-1.234-.052-3.637s.009-2.688.052-3.637c.04-.877.187-1.354.31-1.67.163-.421.358-.72.673-1.036.315-.315.615-.51 1.035-.673.317-.123.794-.27 1.671-.31.95-.043 1.234-.052 3.637-.052Z">
+                </path>
+                <path
+                    d="M12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm0-7.622a4.622 4.622 0 1 0 0 9.244 4.622 4.622 0 0 0 0-9.244Zm5.884-.182a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0Z">
+                </path>
+            </svg>
+        </a>
+        <a target="_blank" class="group -m-1 p-1" aria-label="Follow on GitHub" href="https://github.com/gcaraciolo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"
+                class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12 2C6.475 2 2 6.588 2 12.253c0 4.537 2.862 8.369 6.838 9.727.5.09.687-.218.687-.487 0-.243-.013-1.05-.013-1.91C7 20.059 6.35 18.957 6.15 18.38c-.113-.295-.6-1.205-1.025-1.448-.35-.192-.85-.667-.013-.68.788-.012 1.35.744 1.538 1.051.9 1.551 2.338 1.116 2.912.846.088-.666.35-1.115.638-1.371-2.225-.256-4.55-1.14-4.55-5.062 0-1.115.387-2.038 1.025-2.756-.1-.256-.45-1.307.1-2.717 0 0 .837-.269 2.75 1.051.8-.23 1.65-.346 2.5-.346.85 0 1.7.115 2.5.346 1.912-1.333 2.75-1.05 2.75-1.05.55 1.409.2 2.46.1 2.716.637.718 1.025 1.628 1.025 2.756 0 3.934-2.337 4.806-4.562 5.062.362.32.675.936.675 1.897 0 1.371-.013 2.473-.013 2.82 0 .268.188.589.688.486a10.039 10.039 0 0 0 4.932-3.74A10.447 10.447 0 0 0 22 12.253C22 6.588 17.525 2 12 2Z">
+                </path>
+            </svg>
+        </a>
+        <a target="_blank" class="group -m-1 p-1" aria-label="Follow on LinkedIn" href="https://www.linkedin.com/in/guilherme-caraciolo-52485999/">
+            <svg viewBox="0 0 24 24" aria-hidden="true"
+                class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300">
+                <path
+                    d="M18.335 18.339H15.67v-4.177c0-.996-.02-2.278-1.39-2.278-1.389 0-1.601 1.084-1.601 2.205v4.25h-2.666V9.75h2.56v1.17h.035c.358-.674 1.228-1.387 2.528-1.387 2.7 0 3.2 1.778 3.2 4.091v4.715zM7.003 8.575a1.546 1.546 0 01-1.548-1.549 1.548 1.548 0 111.547 1.549zm1.336 9.764H5.666V9.75H8.34v8.589zM19.67 3H4.329C3.593 3 3 3.58 3 4.297v15.406C3 20.42 3.594 21 4.328 21h15.338C20.4 21 21 20.42 21 19.703V4.297C21 3.58 20.4 3 19.666 3h.003z">
+                </path>
+            </svg>
+        </a>
+    </div>
+</div>
+    </div>
+        </main>
+
+        <script src="/assets/build/js/main.js?id=b7a53903c7901b49880ccb30ec0c429f"></script>
+
+            </body>
+</html>

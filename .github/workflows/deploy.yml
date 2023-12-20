@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-site:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -16,14 +16,37 @@ jobs:
       run: npm install
     - name: Build Site
       run: npm run prod
-    - name: Stage Files
-      run: git add -f build_production
-    - name: Commit
-      run: |
-        git config --local user.email "actions@github.com"
-        git config --local user.name "GitHub Actions"
-        git commit -m "Build for deploy"
-    - name: Publish
-      run: |
-        git subtree split --prefix build_production -b gh-pages
-        git push -f origin gh-pages:gh-pages
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          # upload entire directory
+          path: 'build_production'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+    # runs-on: ubuntu-latest
+    # steps:
+    # - name: Stage Files
+    #   run: git add -f build_production
+    # - name: Commit
+    #   run: |
+    #     git config --local user.email "actions@github.com"
+    #     git config --local user.name "GitHub Actions"
+    #     git commit -m "Build for deploy"
+    # - name: Publish
+    #   run: |
+    #     git subtree split --prefix build_production -b gh-pages
+    #     git push -f origin gh-pages:gh-pages

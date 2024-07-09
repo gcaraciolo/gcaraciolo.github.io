@@ -25,6 +25,7 @@ class Tag extends Model { }
 ```
 
 This relation is used to model a **many-to-many** relation. The intermediate table has **both keys** to the tables being related. Using the schema above, we say that:
+
 - A contact can have many tags or none;
 - and a tag can have many contacts or none;
 
@@ -50,20 +51,19 @@ Both methods **allows duplicates**. It's the programmer responsibility to filter
 $contact->tags()->attach($tag->id);
 $contact->tags()->attach($tag->id); // duplicates the relation
 
-$contact->tags()->sync([$tag->id, $tag->id]); // duplicated the relation
+$contact->tags()->sync([$tag->id, $tag->id]); // duplicates the relation
 ```
 
-By using belongsToMany the relation gains the following methods:
+By using belongsToMany relation use gain following methods:
 
-| method               |
-| -------------------- |
-| sync                 |
-| syncWithoutDetaching |
-| attach               |
-| detach               |
-| syncWithPivotValues  |
-| toggle               |
-| updateExistingPivot  |
+- sync                 
+- syncWithoutDetaching 
+- attach               
+- detach               
+- syncWithPivotValues  
+- toggle               
+- updateExistingPivot  
+
 ## HasManyThrough
 
 <img src="/assets/img/project-deployments.png">
@@ -82,7 +82,8 @@ class Environment extends Model { }
 class Deployment extends Model  { }
 ```
 
-This relation is used to create an alias for **two one to many** relations that have some table in common. The intermediate table has a key for just one of the tables being related. Using the schema above, we say that:
+This relation is used to create an alias for **two one to many** relations that have some table in common. The intermediate table has a key for just __one__ of the tables being related. Using the schema above, we say that:
+
 - A project has many environments
 - An environment has many deployments
 - And a project has many deployments through environments

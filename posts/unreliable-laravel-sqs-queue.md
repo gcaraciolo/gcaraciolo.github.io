@@ -10,6 +10,8 @@ Recently I was trying to understanding why some Laravel Jobs weren't being execu
 I realized that some jobs haven't even started in the first place, which made me thought that the problem wasn't
 in my code.
 
+---
+
 So I decided to create a fresh Proof of Concept (PoC) Laravel project to dig deeper, with the goal to understand how
 Laravel decides when a job should be processed or not.
 

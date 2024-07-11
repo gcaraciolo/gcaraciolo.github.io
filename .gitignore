@@ -5,3 +5,4 @@
 .DS_Store
 torchlight_cache/
 .env
+.vitepress/dist

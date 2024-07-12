@@ -1,8 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "dev": "mix",
-        "watch": "mix watch",
+        "dev": "mix watch",
         "prod": "mix --production"
     },
     "devDependencies": {
